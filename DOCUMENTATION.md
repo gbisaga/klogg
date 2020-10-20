@@ -16,6 +16,8 @@ file to open as an argument, or via the desktop environment's menu or
 file association. If no file name is passed, *klogg* will initially open
 the last used file.
 
+![Klogg screenshot](basic-screenshot.png)
+
 The main window is divided in three parts : the top displays the log
 file. The bottom part, called the "filtered view", shows the results of
 the search. The line separating the two contains the regular expression
