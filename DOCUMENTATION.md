@@ -18,21 +18,28 @@ the last used file.
 
 ![Klogg screenshot](docs/basic-screenshot.png)
 
-The main window is divided in three parts : the top displays the log
-file. The bottom part, called the "filtered view", shows the results of
-the search. The line separating the two contains the regular expression
-used as a filter.
+The main window is divided in three sections:
 
-Entering a new regular expression, or a simple search term, will update
+* The top section displays the log
+files. You can have any number of open files at once, differentiated by named tabs.
+* The bottom section, called the "filtered view", shows the results of
+searches and marked lines. You can click on any of the lines in the filtered view and the top section jumps to that line of the log file. In addition to the filtered view, the match overview on the right hand side of the top section shows the position of matches in the log file. Matches are showed as small red lines.
+* The line separating the top and bottom sections contains the regular expression
+used as a filter. Entering a new regular expression, or a simple search term, will update
 the bottom view, displaying the results of the search. The lines
 matching the search criteria are listed in order in the results, and are
 marked with a red circle in both windows.
 
 ## Exploring log files
 
+The filtered view is one of the most powerful features of *klogg*. It lets you search for interesting (or problem) patterns in the log files such as exceptions or warnings. The filtered view becomes even more powerful with the use of [highlighters](#using-highlighters).
+
+### Search patterns
+
+
 Regular expressions are a powerful way to extract the information you
 are interested in from the log file. *klogg* uses *extended regular
-expressions*.
+expressions*. Any lines in the log file that match the regex will show up in the filtered view.
 
 One of the most useful regexp feature when exploring logs is the
 *alternation*, using parentheses and the | operator. It searches for
@@ -60,20 +67,18 @@ for them. This history can be cleared from search text box context menu.
 Autocomplete is case sensitive if this option is selected for matching 
 regular expression.
 
-In addition to the filtered window, the match overview on the right hand
-side of the screen offers a view of the position of matches in the log
-file. Matches are showed as small red lines.
+### Marking lines
 
 In addition to regexp matches, *klogg* enables the user to mark any
 interesting line in the log. To do this, click on the round bullet in
-the left margin in front of the line that needs to be marked or select
+the left margin in front of the line that needs to be marked. Alternatively, select
 the line and press `'m'` hotkey.
 To mark several lines at once select them and use `'m'` hotkey or context menu.
 
 Marks are combined with matches and are always visible
 in the filtered window. They also appears as blue lines in the match overview.
 
-### Opening files
+## Opening files
 
 *klogg* provides several options for opening files:
 
@@ -83,10 +88,10 @@ in the filtered window. They also appears as blue lines in the match overview.
 * providing one or many files via command line
 * using recent files or favorites menu items.
 
-On Winodws and Mac OS *klogg* installer configures operating system to open `.log` files by
+On Windows and Mac OS *klogg* installer configures operating system to open `.log` files by
 clicking them in file manager.
 
-#### Archives
+### Archives
 
 *klogg* can open archives (`zip`, `7z`, and `tar`). Archive is extracted
 to temporary directory and standard open file dialog is presented to
@@ -97,17 +102,17 @@ content or extension).
 decompressed to temporary folder and then opened. Compression type is
 determined automatically (by file content or extension).
 
-#### Urls
+### Urls
 
 *klogg* can open files from remote urls. In that case *klogg* will
 download file to temporary directory and open it from there.
 
-#### Recent files
+### Recent files
 
 *klogg* saves history of recent opened files. Up to 5 recent files are
 available from `File` menu.
 
-#### Favorites
+### Favorites
 
 Opened files can be added to `Favorites` menu either from
 `Favorites->Add to Favorites` or from toolbar.
@@ -115,47 +120,55 @@ Opened files can be added to `Favorites` menu either from
 This menu is used to provide fast access to files that are opened less
 often and don't end up in recent files.
 
-#### Clipboard
+### Clipboard
 
 Pasting text from clipboard to *klogg* also works. In this case *klogg*
 will save pasted text to temporary file and open that file for
 exploring.
 
-#### Switching between opened files
+### Switching between opened files
 
 Switching from one opened file to another can be done from 
 `View->Opened files` menu or using `Ctrl+Shift+O` shortcut 
-that shows special dialog to choose between opened files.
+that shows special dialog to choose between opened files. You can also just click the tab of the file you want to view.
 
 ### Encodings
 
 *klogg* tries to guess encoding of opened file. If that guess happens to
 be wrong then desired encoding can be selected from `Encoding` menu.
 
-### Using highlighters
+## Using highlighters
 
 *Highlighters* can colorize some lines of the log being displayed, for
 example to draw attention to lines indicating an error, or to associate
-a color with each sort of event. 
+a color with each sort of event.  Highlighters colorize lines in both the top and bottom sections of the page.
 
 Highlighters are grouped into sets. One set of highlighters can be active
 at any given time. Current active set can be selected using either 
 context menu or `Tools->Highlighters` menu.
+
+![Select highlighter set](docs/highlighter-set-select.png)
+
+In this example, two highlighter sets are defined, and the one called "Main log views" is selected.
+
+To define highlighter sets, use Configure highlighters...
+
+![Configure highlighters](docs/configure-highlighters.png)
 
 Any number of highlighters can be defined in a single set.
 Highlighter configuration includes a regular expression to match
 and color options. Another option is to use plain text patterns
 in cases when complex regular expression are not needed.
 
-Each highlighter can be configured to apply fore and 
-back colors either to the whole line that matched its regular
-expression or only to matching parts of the line. In the latter case 
+Each highlighter can be configured to apply foreground and 
+background colors either to the whole line that matched its regular
+expression or only to matching parts of the line. In the latter case, 
 if regular expression contains capture groups then only the captured
 parts of matching line are highlighted.
 
 Order of highlighters in the set does matter. For each line all
 highlighters are tried from bottom to top. Each new matching 
-highlighter overrides colors for current line. 
+highlighter overrides colors for current line.
 
 Highlighters configuration can be exported to a file and 
 imported for example on another machine. Each set is identified
